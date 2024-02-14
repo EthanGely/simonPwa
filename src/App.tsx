@@ -7,7 +7,7 @@ function getRandomColor() : String {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function factorial(num: Number) : Number
+function factorial(num: number) : number
 {
     let rval=1;
     for (let i = 2; i <= num; i++)
@@ -17,7 +17,7 @@ function factorial(num: Number) : Number
 
 function App() {
     const [sequence, setSequence] = useState<String[]>([]);
-    const [currentIndex, setCurrentIndex] = useState<Number>(-1);
+    const [currentIndex, setCurrentIndex] = useState<number>(-1);
     const [isPlayerTurn, setIsPlayerTurn] = useState<Boolean>(false);
 
     useEffect(() => {
