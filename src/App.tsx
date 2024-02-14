@@ -35,8 +35,6 @@ function App() {
                 return () => clearTimeout(timeout);
 
             } else {
-                console.log("current index : ", currentIndex)
-                console.log("sequence.length : ", sequence.length)
                 if (currentIndex === sequence.length) {
                     // Player has got all colors. Need to add new color then show all from beginning.
                     newSequence = [...sequence];
