@@ -95,6 +95,7 @@ function App() {
                         // wrong color clicked
                         console.log("Game lost\nYou clicked on", color, "but", currentColor, "was expected.\nYour score :", score, "points.");
                         if (hasNotificationPermission) {
+                            // @ts-ignore
                             const notification = new Notification("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
                         } else {
                             alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
