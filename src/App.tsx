@@ -3,13 +3,25 @@ import './App.css'
 
 const colors = ["red", "blue", "green", "yellow"];
 
-function getRandomColor() : String {
+let hasNotificationPermission = false;
+if ("Notification" in window) {
+    if (Notification.permission === "granted") {
+        hasNotificationPermission = true;
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+                hasNotificationPermission = true;
+            }
+        });
+    }
+}
+
+function getRandomColor(): String {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function factorial(num: number) : number
-{
-    let rval=1;
+function factorial(num: number): number {
+    let rval = 1;
     for (let i = 2; i <= num; i++)
         rval = rval + i;
     return rval;
@@ -22,8 +34,8 @@ function App() {
 
     useEffect(() => {
         if (!isPlayerTurn) {
-            const randomColor : String = getRandomColor();
-            let newSequence : String[] = [];
+            const randomColor: String = getRandomColor();
+            let newSequence: String[] = [];
 
             if (currentIndex === -1) {
                 newSequence.push(randomColor);
@@ -31,7 +43,7 @@ function App() {
                 const timeout = setTimeout(() => {
                     setSequence(newSequence)
                     setCurrentIndex(currentIndex + 1);
-                }, 1200);
+                }, 800);
                 return () => clearTimeout(timeout);
 
             } else {
@@ -42,46 +54,51 @@ function App() {
                     const timeout = setTimeout(() => {
                         setSequence(newSequence)
                         setCurrentIndex(0);
-                    }, 1200);
+                    }, 800);
                     return () => clearTimeout(timeout);
                 } else if (currentIndex >= sequence.length - 1) {
                     // All colors shown, player's turn
                     const timeout = setTimeout(() => {
                         setIsPlayerTurn(true);
                         setCurrentIndex(0);
-                    }, 1200);
+                    }, 800);
                     return () => clearTimeout(timeout);
                 } else {
                     // Showing colors
                     const timeout = setTimeout(() => {
                         setCurrentIndex(currentIndex + 1);
-                    }, 1200);
+                    }, 800);
                     return () => clearTimeout(timeout);
                 }
             }
         } else {
             const timeout = setTimeout(() => {
-            }, 1200);
+            }, 800);
             return () => clearTimeout(timeout);
         }
     }, [currentIndex, sequence])
 
-    const handleClick = useCallback((color : String) => {
+    const handleClick = useCallback((color: String) => {
         if (isPlayerTurn) {
             if (currentIndex != -1) {
                 const currentColor = sequence[currentIndex]
                 if (currentColor) {
                     if (currentColor === color) {
-                        console.log("Correct color clicked");
+                        navigator.vibrate(100);
                         setCurrentIndex(currentIndex + 1);
                         if (currentIndex === sequence.length - 1) {
                             setIsPlayerTurn(false);
                         }
                     } else {
+                        navigator.vibrate(350);
                         let score = factorial(sequence.length - 1) + currentIndex + 1;
                         // wrong color clicked
                         console.log("Game lost\nYou clicked on", color, "but", currentColor, "was expected.\nYour score :", score, "points.");
-                        alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
+                        if (hasNotificationPermission) {
+                            const notification = new Notification("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
+                        } else {
+                            alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
+                        }
                         setIsPlayerTurn(false);
                         setCurrentIndex(-1);
                     }
@@ -94,9 +111,6 @@ function App() {
                 console.log("Game not started or lost");
                 setIsPlayerTurn(false);
             }
-        } else {
-            // Ce n'est pas au joueur de jouer
-            console.log("Not your turn");
         }
     }, [isPlayerTurn, currentIndex, sequence]);
 
@@ -106,10 +120,9 @@ function App() {
             <div className="playField">
                 {colors.map((color, i) => {
                     let className = ''
-                    if(isPlayerTurn){
+                    if (isPlayerTurn) {
                         className = 'hoverable'
-                    }
-                    else if(color === sequence[currentIndex]) {
+                    } else if (color === sequence[currentIndex]) {
                         className = 'hovered'
                     }
 
