@@ -65,6 +65,7 @@ function App() {
                     return () => clearTimeout(timeout);
                 } else {
                     // Showing colors
+                    navigator.vibrate(100);
                     const timeout = setTimeout(() => {
                         setCurrentIndex(currentIndex + 1);
                     }, 800);
