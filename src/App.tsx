@@ -104,6 +104,7 @@ function App() {
 
     return (
         <>
+            <h1>Simon game</h1>
             <div className="playField">
                 {colors.map((color, i) => {
                     let className = ''
