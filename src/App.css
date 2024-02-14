@@ -65,8 +65,16 @@
 }
 
 .red.hoverable:hover {
-  background-color: red;
   box-shadow: red 0 0 15px;
+}
+
+.red.hoverable:active {
+  background-color: red;
+}
+
+.red.hovered {
+  background-color: red;
+  box-shadow: red 0 0 20px;
 }
 
 .blue {
@@ -74,8 +82,15 @@
 }
 
 .blue.hoverable:hover {
-  background-color: blue;
   box-shadow: blue 0 0 15px;
+}
+
+.blue.hoverable:active {
+  background-color: blue;
+}
+
+.blue.hovered {
+  background-color: blue;
 }
 
 .green {
@@ -84,8 +99,16 @@
 }
 
 .green.hoverable:hover {
-  background-color: green;
   box-shadow: green 0 0 15px;
+}
+
+.green.hoverable:active {
+  background-color: green;
+}
+
+.green.hovered {
+  background-color: green;
+  box-shadow: green 0 0 20px;
 }
 
 .yellow {
@@ -94,6 +117,14 @@
 }
 
 .yellow.hoverable:hover {
-  background-color: yellow;
   box-shadow: yellow 0 0 15px;
+}
+
+.yellow.hoverable:active {
+  background-color: yellow;
+}
+
+.yellow.hovered {
+  background-color: yellow;
+  box-shadow: yellow 0 0 20px;
 }
