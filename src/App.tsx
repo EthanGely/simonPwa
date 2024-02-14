@@ -1,12 +1,72 @@
-import {useCallback, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import './App.css'
 
-function App() {
-    const colors = ["red", "blue", "green", "yellow"];
+const colors = ["red", "blue", "green", "yellow"];
 
-    const [sequence, setSequence] = useState(new Array(50));
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function factorial(num)
+{
+    let rval=1;
+    for (let i = 2; i <= num; i++)
+        rval = rval * i;
+    return rval;
+}
+
+function App() {
+    const [sequence, setSequence] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(-1);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+    const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+
+    useEffect(() => {
+        if (!isPlayerTurn) {
+            const randomColor = getRandomColor();
+            let newSequence = [];
+
+            if (currentIndex === -1) {
+                newSequence.push(randomColor);
+
+                const timeout = setTimeout(() => {
+                    setSequence(newSequence)
+                    setCurrentIndex(currentIndex + 1);
+                }, 1200);
+                return () => clearTimeout(timeout);
+
+            } else {
+                console.log("current index : ", currentIndex)
+                console.log("sequence.length : ", sequence.length)
+                if (currentIndex === sequence.length) {
+                    // Player has got all colors. Need to add new color then show all from beginning.
+                    newSequence = [...sequence];
+                    newSequence.push(randomColor);
+                    const timeout = setTimeout(() => {
+                        setSequence(newSequence)
+                        setCurrentIndex(0);
+                    }, 1200);
+                    return () => clearTimeout(timeout);
+                } else if (currentIndex >= sequence.length - 1) {
+                    // All colors shown, player's turn
+                    const timeout = setTimeout(() => {
+                        setIsPlayerTurn(true);
+                        setCurrentIndex(0);
+                    }, 1200);
+                    return () => clearTimeout(timeout);
+                } else {
+                    // Showing colors
+                    const timeout = setTimeout(() => {
+                        setCurrentIndex(currentIndex + 1);
+                    }, 1200);
+                    return () => clearTimeout(timeout);
+                }
+            }
+        } else {
+            const timeout = setTimeout(() => {
+            }, 1200);
+            return () => clearTimeout(timeout);
+        }
+    }, [currentIndex, sequence])
 
     const handleClick = useCallback((color) => {
         if (isPlayerTurn) {
@@ -15,60 +75,52 @@ function App() {
                 if (currentColor) {
                     if (currentColor === color) {
                         console.log("Correct color clicked");
-                        if (currentIndex < sequence.length - 1) {
-                            setCurrentIndex(currentIndex + 1);
-                        } else {
+                        setCurrentIndex(currentIndex + 1);
+                        if (currentIndex === sequence.length - 1) {
                             setIsPlayerTurn(false);
-                            // Need to add a new color here
-                            const newSequence = [...sequence];
-                            const randomColor = getRandomColor();
-                            newSequence.push(randomColor);
-                            console.log("Added color", randomColor)
-                            setSequence(newSequence)
-                            setCurrentIndex(0);
-                            setIsPlayerTurn(true);
                         }
                     } else {
-                        //Mauvaise couleur cliquée
-                        setCurrentIndex(-1);
+                        let score = factorial(sequence.length - 1) + currentIndex + 1;
+                        // wrong color clicked
+                        console.log("Game lost\nYou clicked on", color, "but", currentColor, "was expected.\nYour score :", score, "points.");
+                        alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
                         setIsPlayerTurn(false);
-                        console.log("Game lost\nYou clicked on", color, "but", currentColor, "was expected.");
-                        alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.");
+                        setCurrentIndex(-1);
                     }
                 } else {
                     // Dépassement de l'array
+                    console.error("This bug is the graphic designer's fault.\nSigned by the perfect dev.")
                 }
             } else {
                 // La partie n'est pas initialisée ou perdue
-                //console.log("Game not started or lost\nYou clicked on", color);
+                console.log("Game not started or lost");
                 setIsPlayerTurn(false);
-
-                // INIT FORCE - DELETE LATER
-                setSequence(["red"]);
-                setCurrentIndex(0);
-                setIsPlayerTurn(true);
-                console.log("GAME INIT : YOUR TURN")
             }
         } else {
             // Ce n'est pas au joueur de jouer
-            console.log("Not your turn\nYou clicked on", color);
-            //TEMPORAIRE - TO DELETE
-            setIsPlayerTurn(!isPlayerTurn);
-            ////////////////////////
+            console.log("Not your turn");
         }
     }, [isPlayerTurn, currentIndex, sequence]);
-
-    function getRandomColor() {
-        return colors[Math.floor(Math.random() * colors.length)];
-    }
 
     return (
         <>
             <div className="playField">
-                <div id="red" className="red hoverable" onClick={() => handleClick("red")}></div>
-                <div id="blue" className="blue hoverable" onClick={() => handleClick("blue")}></div>
-                <div id="green" className="green hoverable" onClick={() => handleClick("green")}></div>
-                <div id="yellow" className="yellow hoverable" onClick={() => handleClick("yellow")}></div>
+                {colors.map((color, i) => {
+                    let className = ''
+                    if(isPlayerTurn){
+                        className = 'hoverable'
+                    }
+                    else if(color === sequence[currentIndex]) {
+                        className = 'hovered'
+                    }
+
+                    return <div
+                        key={i}
+                        id={color}
+                        className={className}
+                        onClick={() => handleClick(color)}
+                    />
+                })}
             </div>
         </>
     )

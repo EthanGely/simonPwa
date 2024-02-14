@@ -60,71 +60,80 @@
   transition: all .3s;
 }
 
-.red {
+.playField div:not(.hoverable) {
+  cursor: not-allowed;
+}
+
+.playField div:not(.hoverable):not(.hovered) {
+  opacity: 0.5;
+}
+
+#red {
   background-color: #d30000;
 }
 
-.red.hoverable:hover {
+#red.hoverable:hover {
   box-shadow: red 0 0 15px;
 }
 
-.red.hoverable:active {
+#red.hoverable:active {
   background-color: red;
 }
 
-.red.hovered {
+#red.hovered {
   background-color: red;
   box-shadow: red 0 0 20px;
 }
 
-.blue {
+#blue {
   background-color: #0000c9;
 }
 
-.blue.hoverable:hover {
+#blue.hoverable:hover {
   box-shadow: blue 0 0 15px;
 }
 
-.blue.hoverable:active {
+#blue.hoverable:active {
   background-color: blue;
 }
 
-.blue.hovered {
+#blue.hovered {
   background-color: blue;
+  box-shadow: blue 0 0 20px;
 }
 
-.green {
+#green {
   background-color: #006000;
   margin-top: 10px;
 }
 
-.green.hoverable:hover {
+#green.hoverable:hover {
   box-shadow: green 0 0 15px;
 }
 
-.green.hoverable:active {
+#green.hoverable:active {
   background-color: green;
 }
 
-.green.hovered {
+#green.hovered {
   background-color: green;
   box-shadow: green 0 0 20px;
 }
 
-.yellow {
+#yellow {
   background-color: #b4b400;
   margin-top: 10px;
 }
 
-.yellow.hoverable:hover {
+#yellow.hoverable:hover {
   box-shadow: yellow 0 0 15px;
 }
 
-.yellow.hoverable:active {
+#yellow.hoverable:active {
   background-color: yellow;
 }
 
-.yellow.hovered {
+#yellow.hovered {
   background-color: yellow;
   box-shadow: yellow 0 0 20px;
 }
