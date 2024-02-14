@@ -40,3 +40,59 @@
 .read-the-docs {
   color: #888;
 }
+
+.playField {
+  width: 50%;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background: #575757;
+  min-width: 500px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.playField div {
+  flex: 0 0 calc(50% - 10px);
+  transition: all .3s;
+}
+
+.red {
+  background-color: #d30000;
+}
+
+.red.hoverable:hover {
+  background-color: red;
+  box-shadow: red 0 0 15px;
+}
+
+.blue {
+  background-color: #0000c9;
+}
+
+.blue.hoverable:hover {
+  background-color: blue;
+  box-shadow: blue 0 0 15px;
+}
+
+.green {
+  background-color: #006000;
+  margin-top: 10px;
+}
+
+.green.hoverable:hover {
+  background-color: green;
+  box-shadow: green 0 0 15px;
+}
+
+.yellow {
+  background-color: #b4b400;
+  margin-top: 10px;
+}
+
+.yellow.hoverable:hover {
+  background-color: yellow;
+  box-shadow: yellow 0 0 15px;
+}
