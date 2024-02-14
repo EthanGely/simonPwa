@@ -3,11 +3,11 @@ import './App.css'
 
 const colors = ["red", "blue", "green", "yellow"];
 
-function getRandomColor() {
+function getRandomColor() : String {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-function factorial(num)
+function factorial(num: Number) : Number
 {
     let rval=1;
     for (let i = 2; i <= num; i++)
@@ -16,14 +16,14 @@ function factorial(num)
 }
 
 function App() {
-    const [sequence, setSequence] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(-1);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(false);
+    const [sequence, setSequence] = useState<String[]>([]);
+    const [currentIndex, setCurrentIndex] = useState<Number>(-1);
+    const [isPlayerTurn, setIsPlayerTurn] = useState<Boolean>(false);
 
     useEffect(() => {
         if (!isPlayerTurn) {
-            const randomColor = getRandomColor();
-            let newSequence = [];
+            const randomColor : String = getRandomColor();
+            let newSequence : String[] = [];
 
             if (currentIndex === -1) {
                 newSequence.push(randomColor);
@@ -68,7 +68,7 @@ function App() {
         }
     }, [currentIndex, sequence])
 
-    const handleClick = useCallback((color) => {
+    const handleClick = useCallback((color : String) => {
         if (isPlayerTurn) {
             if (currentIndex != -1) {
                 const currentColor = sequence[currentIndex]
