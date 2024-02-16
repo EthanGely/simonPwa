@@ -46,7 +46,7 @@ export default defineConfig({
         workbox: {
           runtimeCaching: [
             {
-              urlPattern: 'http://localhost:3000',
+              urlPattern: 'https://dateapi.onrender.com',
               handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'currentDate',
