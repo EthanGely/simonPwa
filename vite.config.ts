@@ -42,7 +42,25 @@ export default defineConfig({
             "purpose": "any"
           }
         ]
-      }
+      },
+        workbox: {
+          runtimeCaching: [
+            {
+              urlPattern: 'http://localhost:3000',
+              handler: 'StaleWhileRevalidate',
+              options: {
+                cacheName: 'currentDate',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+                },
+                cacheableResponse: {
+                  statuses: [0, 200]
+                }
+              }
+            }
+          ]
+        }
     })
   ],
 })

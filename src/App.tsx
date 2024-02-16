@@ -31,6 +31,7 @@ function App() {
     const [sequence, setSequence] = useState<String[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(-1);
     const [isPlayerTurn, setIsPlayerTurn] = useState<Boolean>(false);
+    const [dateCache, setDateCache] = useState<String>("");
 
     useEffect(() => {
         if (!isPlayerTurn) {
@@ -97,7 +98,10 @@ function App() {
                         console.log("Game lost\nYou clicked on", color, "but", currentColor, "was expected.\nYour score :", score, "points.");
                         if (hasNotificationPermission) {
                             // @ts-ignore
-                            const notification = new Notification("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
+                            //const notification = new Notification("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
+                            const body = "You clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points."
+                            // @ts-ignore
+                            const notification = new Notification("Game lost", {body: body});
                         } else {
                             alert("Game lost\nYou clicked on " + color + " but " + currentColor + " was expected.\nYour score " + score + " points.");
                         }
@@ -116,9 +120,21 @@ function App() {
         }
     }, [isPlayerTurn, currentIndex, sequence]);
 
+    useEffect(() => {
+        async function getDate() {
+            const response = await fetch('http://localhost:3000');
+            console.log(response)
+            const date = await response.text();
+            setDateCache(date);
+        }
+        getDate();
+    }, [])
+
     return (
         <>
             <h1>Simon game</h1>
+            <h2>Client date : {Date.now()}</h2>
+            <h2>Server date : {dateCache}</h2>
             <div className="playField">
                 {colors.map((color, i) => {
                     let className = ''
