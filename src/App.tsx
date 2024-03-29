@@ -133,8 +133,6 @@ function App() {
     return (
         <>
             <h1>Simon game</h1>
-            <h2>Client date : {Date.now()}</h2>
-            <h2>Server date : {dateCache}</h2>
             <div className="playField">
                 {colors.map((color, i) => {
                     let className = ''

@@ -52,6 +52,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
+  box-sizing:border-box;
+  border: 3px solid #bbb;
 }
 
 .playField div {
@@ -69,7 +71,7 @@
 }
 
 #red {
-  background-color: #d30000;
+  background-color: #530000;
 }
 
 #red.hoverable:hover {
@@ -86,7 +88,7 @@
 }
 
 #blue {
-  background-color: #0000c9;
+  background-color: #000059;
 }
 
 #blue.hoverable:hover {
@@ -103,7 +105,7 @@
 }
 
 #green {
-  background-color: #006000;
+  background-color: #005000;
   margin-top: 10px;
 }
 
@@ -121,7 +123,7 @@
 }
 
 #yellow {
-  background-color: #b4b400;
+  background-color: #545400;
   margin-top: 10px;
 }
 
