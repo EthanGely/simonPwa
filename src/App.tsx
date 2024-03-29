@@ -31,7 +31,6 @@ function App() {
     const [sequence, setSequence] = useState<String[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(-1);
     const [isPlayerTurn, setIsPlayerTurn] = useState<Boolean>(false);
-    const [dateCache, setDateCache] = useState<String>("");
 
     useEffect(() => {
         if (!isPlayerTurn) {
@@ -119,16 +118,6 @@ function App() {
             }
         }
     }, [isPlayerTurn, currentIndex, sequence]);
-
-    useEffect(() => {
-        async function getDate() {
-            const response = await fetch('https://dateapi.onrender.com');
-            console.log(response)
-            const date = await response.text();
-            setDateCache(date);
-        }
-        getDate();
-    }, [])
 
     return (
         <>
