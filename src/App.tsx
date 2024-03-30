@@ -127,6 +127,10 @@ function App() {
                     let className = ''
                     if (isPlayerTurn) {
                         className = 'hoverable'
+
+                        if (color === sequence[currentIndex - 1]) {
+                            className += " clicked";
+                        }
                     } else if (color === sequence[currentIndex]) {
                         className = 'hovered'
                     }
