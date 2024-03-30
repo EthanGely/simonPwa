@@ -77,7 +77,9 @@
 }
 
 #red {
-  background-color: #530000;
+  --color: red;
+  background-color: color-mix(in srgb, var(--color), black);
+  
 }
 
 #red.hoverable:hover {
@@ -89,12 +91,9 @@
   background-color: red;
 }
 
-#red.hovered {
-  --color: red;
-}
-
 #blue {
-  background-color: #000059;
+  --color: blue;
+  background-color: color-mix(in srgb, var(--color), black);
 }
 
 #blue.hoverable:hover {
@@ -106,12 +105,9 @@
   background-color: blue;
 }
 
-#blue.hovered {
-  --color: blue;
-}
-
 #green {
-  background-color: #005000;
+  --color: green;
+  background-color: color-mix(in srgb, var(--color), black);
   margin-top: 10px;
 }
 
@@ -124,12 +120,9 @@
   background-color: green;
 }
 
-#green.hovered {
-  --color: green;
-}
-
 #yellow {
-  background-color: #545400;
+  --color: yellow;
+  background-color: color-mix(in srgb, var(--color), black);
   margin-top: 10px;
 }
 
@@ -142,12 +135,13 @@
   background-color: yellow;
 }
 
-#yellow.hovered {
-  --color: yellow;
-}
-
 @keyframes changeColor {
   0% {
+    background-color: color-mix(in srgb, var(--color), black);
+    box-shadow: none;
+  }
+
+  25% {
     background-color: var(--color);
     box-shadow: var(--color) 0 0 20px;
   }
