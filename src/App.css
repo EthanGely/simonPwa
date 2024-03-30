@@ -148,17 +148,17 @@
 
 @keyframes changeColor {
   0% {
-    background-color: --color;
-    box-shadow: --color 0 0 20px;
+    background-color: var(--color);
+    box-shadow: var(--color) 0 0 20px;
   }
 
   75% {
-    background-color: --color;
-    box-shadow: --color 0 0 20px;
+    background-color: var(--color);
+    box-shadow: var(--color) 0 0 20px;
   }
 
   100% {
-    background-color: color-mix(in srgb, --color, black);
+    background-color: color-mix(in srgb, var(--color), black);
     box-shadow: none;
   }
 }
