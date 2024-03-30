@@ -76,8 +76,7 @@
   animation: .8s linear changeColor infinite;
 }
 
-.playField div.clicked {
-  transition: all .3s;
+.playField div.hoverable:active {
   animation: .2s linear changeColor;
 }
 
@@ -92,10 +91,6 @@
   background-color: red;
 }
 
-#red.hoverable:active {
-  background-color: red;
-}
-
 #blue {
   --color: blue;
   background-color: color-mix(in srgb, var(--color), black);
@@ -104,10 +99,6 @@
 #blue.hoverable:hover {
   background-color: blue;
   box-shadow: blue 0 0 15px;
-}
-
-#blue.hoverable:active {
-  background-color: blue;
 }
 
 #green {
@@ -121,10 +112,6 @@
   background-color: green;
 }
 
-#green.hoverable:active {
-  background-color: green;
-}
-
 #yellow {
   --color: yellow;
   background-color: color-mix(in srgb, var(--color), black);
@@ -134,10 +121,6 @@
 #yellow.hoverable:hover {
   box-shadow: yellow 0 0 15px;
   background-color: #ffff00;
-}
-
-#yellow.hoverable:active {
-  background-color: yellow;
 }
 
 @keyframes changeColor {
