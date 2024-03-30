@@ -72,6 +72,7 @@
 }
 
 .playField div.hovered {
+  transition: all .3s;
   animation: color 1s linear 0 1;
 }
 
@@ -147,11 +148,11 @@
 
 @keyframes color {
   0% {
-    background-color: color-mix(in srgb, --color, black);
-    box-shadow: none;
+    background-color: --color;
+    box-shadow: --color 0 0 20px;
   }
 
-  50% {
+  75% {
     background-color: --color;
     box-shadow: --color 0 0 20px;
   }
