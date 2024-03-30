@@ -71,10 +71,14 @@
   opacity: 0.5;
 }
 
-.playField div.hovered,
+.playField div.hovered {
+  transition: all .3s;
+  animation: .8s linear changeColor infinite;
+}
+
 .playField div.clicked {
   transition: all .3s;
-  animation: 1s linear changeColor infinite;
+  animation: .2s linear changeColor;
 }
 
 #red {
