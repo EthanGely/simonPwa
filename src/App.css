@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --color: none;
 }
 
 .logo {
@@ -70,12 +71,17 @@
   opacity: 0.5;
 }
 
+.playField div.hovered {
+  animation: color 1s linear 0 1;
+}
+
 #red {
   background-color: #530000;
 }
 
 #red.hoverable:hover {
   box-shadow: red 0 0 15px;
+  background-color: red;
 }
 
 #red.hoverable:active {
@@ -83,8 +89,7 @@
 }
 
 #red.hovered {
-  background-color: red;
-  box-shadow: red 0 0 20px;
+  --color: red;
 }
 
 #blue {
@@ -92,6 +97,7 @@
 }
 
 #blue.hoverable:hover {
+  background-color: blue;
   box-shadow: blue 0 0 15px;
 }
 
@@ -100,8 +106,7 @@
 }
 
 #blue.hovered {
-  background-color: blue;
-  box-shadow: blue 0 0 20px;
+  --color: blue;
 }
 
 #green {
@@ -111,6 +116,7 @@
 
 #green.hoverable:hover {
   box-shadow: green 0 0 15px;
+  background-color: green;
 }
 
 #green.hoverable:active {
@@ -118,8 +124,7 @@
 }
 
 #green.hovered {
-  background-color: green;
-  box-shadow: green 0 0 20px;
+  --color: green;
 }
 
 #yellow {
@@ -129,6 +134,7 @@
 
 #yellow.hoverable:hover {
   box-shadow: yellow 0 0 15px;
+  background-color: #ffff00;
 }
 
 #yellow.hoverable:active {
@@ -136,6 +142,22 @@
 }
 
 #yellow.hovered {
-  background-color: yellow;
-  box-shadow: yellow 0 0 20px;
+  --color: yellow;
+}
+
+@keyframes color {
+  0% {
+    background-color: color-mix(in srgb, --color, black);
+    box-shadow: none;
+  }
+
+  50% {
+    background-color: --color;
+    box-shadow: --color 0 0 20px;
+  }
+
+  100% {
+    background-color: color-mix(in srgb, --color, black);
+    box-shadow: none;
+  }
 }
