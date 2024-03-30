@@ -73,7 +73,7 @@
 
 .playField div.hovered {
   transition: all .3s;
-  animation: color 1s linear 0 1;
+  animation: 1s linear changeColor;
 }
 
 #red {
@@ -146,7 +146,7 @@
   --color: yellow;
 }
 
-@keyframes color {
+@keyframes changeColor {
   0% {
     background-color: --color;
     box-shadow: --color 0 0 20px;
