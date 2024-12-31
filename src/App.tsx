@@ -79,6 +79,7 @@ function App() {
         }
     }, [currentIndex, sequence])
 
+    // this is a comment
     const handleClick = useCallback((color: String) => {
         if (isPlayerTurn) {
             if (currentIndex != -1) {
